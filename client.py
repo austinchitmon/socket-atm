@@ -1,3 +1,7 @@
+#   Student:    Austin Chitmon
+#   ID:         010754712
+
+
 import socket
 
 # CONSTANTS
@@ -6,7 +10,8 @@ OPTION_MESSAGE = "\nEnter the number of your desired ATM Operation:\n" \
                  "1.\tWithdraw from my bank account\n" \
                  "2.\tDeposit into my bank account\n" \
                  "3.\tView my balance\n" \
-                 "4.\tClose ATM\n" \
+                 "4.\tClose ATM\n"\
+                 "5.\t(Debug) Terminate Server\n"\
                  "Input: "
 TCP_IP = '127.0.0.1'
 TCP_PORT = 5005
@@ -16,6 +21,7 @@ WITHDRAW_MSG = 'withdraw_'
 DEPOSIT_MSG = 'deposit_'
 VIEW_MSG = 'view'
 CLOSE_MSG = 'close'
+KILL_MSG = 'kill'
 
 # CONNECTION SETUP
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +38,7 @@ def handle_response(response):
 
 
 def print_invalid_option_selection():
-    print('\nERROR: Please enter a number 1-4')
+    print('\nERROR: Please enter a number 1-5')
 
 
 def print_invalid_monetary_amount():
@@ -66,8 +72,8 @@ def validate_int(number):
 
 
 def option_selected_is_invalid(number):
-    # must be int inclusively between 1 and 4
-    if validate_int(number) and 1 <= int(number) <= 4:
+    # must be int inclusively between 1 and 5
+    if validate_int(number) and 1 <= int(number) <= 5:
         return False
     else:
         print_invalid_option_selection()
@@ -114,6 +120,11 @@ def close():
     exit()
 
 
+def close_server():
+    print('Closing ATM Server...')
+    send_message(KILL_MSG)
+
+
 def option_selector(number):
     if number == 1:
         withdraw()
@@ -123,6 +134,8 @@ def option_selector(number):
         view_balance()
     elif number == 4:
         close()
+    elif number == 5:
+        close_server()
 
 
 def main_loop():

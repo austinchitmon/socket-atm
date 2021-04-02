@@ -1,3 +1,6 @@
+Student:    Austin Chitmon
+ID:         010754712
+
 Steps to run:
     1. Open a terminal window, type 'python3 server.py'
     2. Open a separate terminal window, type 'python3 client.py'

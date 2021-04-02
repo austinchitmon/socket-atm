@@ -1,3 +1,7 @@
+#   Student:    Austin Chitmon
+#   ID:         010754712
+
+
 import socket
 
 # CONSTANTS
@@ -8,6 +12,7 @@ WITHDRAW_MSG = 'withdraw'
 DEPOSIT_MSG = 'deposit'
 VIEW_MSG = 'view'
 CLOSE_MSG = 'close'
+KILL_MSG = 'kill'
 BALANCE = 100.00
 s = None
 conn = None
@@ -91,6 +96,9 @@ def handle_message(message):
         view_balance_container()
     elif messageList[0] == CLOSE_MSG:
         print('LOG: Current connection closed by client.')
+    elif messageList[0] == KILL_MSG:
+        print('TERMINATE: Server terminated by client.')
+        exit()
 
 
 def on_connection_established():
