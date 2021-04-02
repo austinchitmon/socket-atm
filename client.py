@@ -36,14 +36,13 @@ def print_invalid_option_selection():
 
 
 def print_invalid_monetary_amount():
-    print('\nERROR: Please enter a positive whole dollar amount or a positive amount with two decimal places.')
+    print('\nERROR: Please enter a positive whole dollar amount')
 
 
 def validate_positive_float_or_int(number):
     try:
         # check if int
-        int(number)
-        if validate_int(number):
+        if int(number):
             # means number entered is an int
             number = int(number)
             # check it is greater than 0
@@ -54,21 +53,8 @@ def validate_positive_float_or_int(number):
                 print_invalid_monetary_amount()
                 return False
     except ValueError:
-        # value entered not an int
-        try:
-            # try and convert to float
-            float(number)
-            # only allow positive floats with two decimal places
-            if float(number) > 0 and len(number.rsplit('.')[-1]) == 2:
-                return True
-            else:
-                # means entered float is negative or does not have two decimal places
-                print_invalid_monetary_amount()
-                return False
-        # value entered not a float or int
-        except ValueError:
-            print_invalid_monetary_amount()
-            return False
+        print_invalid_monetary_amount()
+        return False
 
 
 def validate_int(number):
